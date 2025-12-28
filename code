@@ -1,0 +1,17 @@
+import haslib
+import pyfiglet
+import sys
+
+ascii_banner = pyfiglet.figlet_format("Hash Cracker")
+print(ascii_banner)
+
+wordlist_path = input("Enter the path to the wordlist file: ")
+hash_to_crack = input("Enter the hash to crack: ")
+
+with open(wordlist_path, 'r') as wordlist_file:
+    for word in wordlist_file:
+        word = word.strip()
+        hashed_word = hashlib.md5(word.encode()).hexdigest()
+        if hashed_word == hash_to_crack:
+            print(f"Hash cracked! The original word is: {word}")
+            sys.exit(0)
